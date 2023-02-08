@@ -44,11 +44,11 @@ public class ProjectRepositoryImpl implements ProjectRepository, AutoCloseable {
     public List<Project> getAllProject() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        Project project = entityManager
-                .createQuery("from Project ", Project.class).getSingleResult();
+        List<Project> projects = entityManager
+                .createQuery("from Project ", Project.class).getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
-        return project;
+        return projects;
     }
 
     @Override
